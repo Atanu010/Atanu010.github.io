@@ -8,6 +8,7 @@ interface HeroProps {
 
 const STORAGE_PHOTO_KEY = 'atanu_custom_profile_photo';
 const STORAGE_ADJUST_KEY = 'atanu_photo_adjustments';
+const DEFAULT_PROFILE_PHOTO = `${import.meta.env.BASE_URL}images/profile.jpg`;
 
 interface PhotoAdjustments {
   zoom: number; // 80 - 180
@@ -16,20 +17,20 @@ interface PhotoAdjustments {
 }
 
 const DEFAULT_ADJUSTMENTS: PhotoAdjustments = {
-  zoom: 105,
+  zoom: 100,
   panY: 0,
   panX: 0,
 };
 
 export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
-  const [photoUrl, setPhotoUrl] = useState<string | null>(() => {
+  const [photoUrl, setPhotoUrl] = useState<string>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_PHOTO_KEY);
-      if (saved) return saved;
+      if (saved && saved.startsWith('data:image/')) return saved;
     } catch (e) {
       console.warn('Could not read saved photo from localStorage', e);
     }
-    return null;
+    return DEFAULT_PROFILE_PHOTO;
   });
 
   const [adjustments, setAdjustments] = useState<PhotoAdjustments>(() => {
@@ -177,58 +178,29 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
                   className="hidden"
                 />
 
-                {/* Portrait Frame with drag-and-drop & live transform adjustments */}
+                {/* Portrait Frame with live transform adjustments */}
                 <div
-                  onDragOver={(e) => {
-                    e.preventDefault();
-                    setIsDragging(true);
-                  }}
-                  onDragLeave={() => setIsDragging(false)}
-                  onDrop={handleDrop}
-                  className={`aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F3ECE4] to-[#E5DCD3] relative group flex items-center justify-center transition-all ${
-                    isDragging ? 'ring-4 ring-[#C85A32] ring-offset-2 scale-[0.99]' : ''
-                  }`}
+                  className="aspect-[4/5] rounded-xl overflow-hidden bg-gradient-to-b from-[#FAF7F2] via-[#F3ECE4] to-[#E5DCD3] relative group flex items-center justify-center transition-all"
                 >
-                  {photoUrl ? (
-                    <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
-                      <img
-                        id="hero-profile-img"
-                        src={photoUrl}
-                        alt={PERSONAL_INFO.name}
-                        referrerPolicy="no-referrer"
-                        style={{
-                          transform: `scale(${adjustments.zoom / 100}) translate(${adjustments.panX}%, ${adjustments.panY}%)`,
-                          transformOrigin: 'center center',
-                          transition: isAdjusting ? 'none' : 'transform 0.2s ease-out',
-                        }}
-                        className="w-full h-full object-contain pointer-events-none"
-                        onError={() => {
-                          setPhotoUrl(null);
-                        }}
-                      />
-                    </div>
-                  ) : (
-                    /* Clean Editorial Upload Frame when awaiting photo */
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      className="w-full h-full flex flex-col items-center justify-center p-6 text-center cursor-pointer hover:bg-black/5 transition"
-                    >
-                      <div className="w-16 h-16 rounded-full bg-white shadow-md flex items-center justify-center mb-3 text-[#C85A32]">
-                        <UploadCloud className="w-8 h-8" />
-                      </div>
-                      <p className="font-bold text-sm text-[#141210] mb-1">
-                        Select Your Original Photo
-                      </p>
-                      <p className="text-xs text-[#3D352E]/70 max-w-xs leading-relaxed mb-4">
-                        Click here or drop your WhatsApp photo to use your authentic photo as it is
-                      </p>
-                      <span className="px-4 py-2 rounded-full bg-[#231F1C] text-white text-[11px] font-bold uppercase tracking-wider shadow">
-                        Browse Photo
-                      </span>
-                    </div>
-                  )}
+                  <div className="w-full h-full overflow-hidden flex items-center justify-center relative">
+                    <img
+                      id="hero-profile-img"
+                      src={photoUrl}
+                      alt={PERSONAL_INFO.name}
+                      referrerPolicy="no-referrer"
+                      style={{
+                        transform: `scale(${adjustments.zoom / 100}) translate(${adjustments.panX}%, ${adjustments.panY}%)`,
+                        transformOrigin: 'center center',
+                        transition: isAdjusting ? 'none' : 'transform 0.2s ease-out',
+                      }}
+                      className="w-full h-full object-cover pointer-events-none"
+                      onError={() => {
+                        setPhotoUrl(DEFAULT_PROFILE_PHOTO);
+                      }}
+                    />
+                  </div>
 
-                  {/* Top-Right Action Buttons */}
+                  {/* Top-Right Action Button */}
                   <div className="absolute top-3 right-3 z-10 flex items-center gap-1.5 opacity-90 group-hover:opacity-100 transition">
                     <button
                       type="button"
@@ -241,16 +213,7 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
                       title="Adjust framing, zoom, and positioning"
                     >
                       <Sliders className="w-3.5 h-3.5 text-[#C85A32]" />
-                      <span>{isAdjusting ? 'Close Adjust' : 'Adjust'}</span>
-                    </button>
-
-                    <button
-                      type="button"
-                      onClick={() => fileInputRef.current?.click()}
-                      className="p-1.5 rounded-full bg-white/95 hover:bg-white text-[#141210] shadow-md border editorial-border transition"
-                      title="Change or upload original photo file"
-                    >
-                      <Camera className="w-3.5 h-3.5 text-[#C85A32]" />
+                      <span>{isAdjusting ? 'Close Adjust' : 'Adjust Frame'}</span>
                     </button>
                   </div>
 

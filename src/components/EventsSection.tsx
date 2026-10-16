@@ -22,27 +22,27 @@ interface PhotoSlot {
 const FLAMES25_SLOTS: PhotoSlot[] = [
   {
     id: 'trap-live',
-    defaultSrc: '/images/flames25/trap-live.jpg',
+    defaultSrc: `${import.meta.env.BASE_URL}images/flames25/trap-live.jpg`,
     badge: 'TRAP Live Headliner',
     title: 'The Radical Array Project (TRAP)',
     caption: 'Headliner Performance: The Radical Array Project (TRAP) performing live on the Flames’25 main stage under red truss lighting and crowd confetti, supervised under Atanu’s logistics & security perimeter coordination.',
-    filenameHint: '20251123_195920.jpg',
+    filenameHint: 'Main Stage Live Performance',
   },
   {
     id: 'core-team',
-    defaultSrc: '/images/flames25/culrav-core-team.jpg',
+    defaultSrc: `${import.meta.env.BASE_URL}images/flames25/culrav-core-team.jpg`,
     badge: 'Core Team Wrap',
     title: 'Culrav Committee & Security Team',
     caption: 'Culrav Organizing Committee, Logistics & Security leads celebrating on the main stage after an incident-free, packed Flames’25 festival wrap (Nov 24, 1:28 AM).',
-    filenameHint: 'WhatsApp Image 2025-11-24 at 01.28.32.jpg',
+    filenameHint: 'Organizing Committee On-Stage Wrap',
   },
   {
     id: 'stage-bassist',
-    defaultSrc: '/images/flames25/flames25-stage-bassist.jpg',
+    defaultSrc: `${import.meta.env.BASE_URL}images/flames25/flames25-stage-bassist.jpg`,
     badge: 'Flames’25 Arena',
     title: 'Flames’25 Arena & Stage Production',
     caption: 'Live band performance featuring illuminated "FLAMES 25" stage backdrop banner, audio roadcase staging, and security barrier management.',
-    filenameHint: 'IMG20251122214420.jpg.jpeg',
+    filenameHint: 'Live Arena Setup & Barrier Management',
   },
 ];
 
@@ -265,42 +265,28 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
                             <ImageIcon className="w-3.5 h-3.5 text-[#C85A32]" />
                             Flames’25 Live Event Photos
                           </span>
-                          <button
-                            type="button"
-                            onClick={() => multiFileInputRef.current?.click()}
-                            className="text-[10px] font-semibold text-[#C85A32] hover:underline flex items-center gap-1"
-                            title="Upload original festival photo files from device"
-                          >
-                            <UploadCloud className="w-3.5 h-3.5" />
-                            <span>Upload / Sync Photos</span>
-                          </button>
+                          <span className="text-[#3D352E]/60 text-[10px]">Click to inspect</span>
                         </div>
 
                         {/* 3 Dedicated Real Photo Slots */}
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                           {FLAMES25_SLOTS.map((slot) => {
                             const activeSrc = customPhotos[slot.id] || slot.defaultSrc;
-                            const hasCustom = Boolean(customPhotos[slot.id]);
 
                             return (
                               <div
                                 key={slot.id}
-                                className="group relative rounded-xl border editorial-border overflow-hidden bg-[#F4EFEA] flex flex-col justify-between transition hover:border-[#C85A32]/60 hover:shadow-md"
+                                onClick={() => onOpenImage(activeSrc, slot.caption)}
+                                className="group relative rounded-xl border editorial-border overflow-hidden bg-[#F4EFEA] flex flex-col justify-between transition hover:border-[#C85A32]/60 hover:shadow-md cursor-pointer"
                               >
                                 {/* Photo Container */}
                                 <div
-                                  onClick={() => onOpenImage(activeSrc, slot.caption)}
-                                  className="relative aspect-[4/3] w-full overflow-hidden cursor-pointer bg-neutral-900"
+                                  className="relative aspect-[4/3] w-full overflow-hidden bg-neutral-900"
                                 >
                                   <img
                                     src={activeSrc}
                                     alt={slot.title}
                                     className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-                                    onError={(e) => {
-                                      // If the local path is not yet populated, provide a stylized fallback preview
-                                      const target = e.currentTarget;
-                                      target.style.display = 'none';
-                                    }}
                                   />
 
                                   {/* Overlay Badge */}
@@ -314,25 +300,10 @@ export const EventsSection: React.FC<EventsSectionProps> = ({
                                   </div>
                                 </div>
 
-                                {/* Slot Caption & Individual Upload Trigger */}
-                                <div className="p-2.5 bg-white border-t editorial-border flex items-center justify-between gap-2 text-[10px]">
-                                  <div className="truncate">
-                                    <p className="font-bold text-[#141210] truncate">{slot.title}</p>
-                                    <p className="text-[#3D352E]/60 text-[9px] truncate font-mono">{slot.filenameHint}</p>
-                                  </div>
-
-                                  <button
-                                    type="button"
-                                    onClick={(e) => {
-                                      e.stopPropagation();
-                                      setActiveSlotUpload(slot.id);
-                                      fileInputRef.current?.click();
-                                    }}
-                                    className="p-1 rounded-md bg-[#FAF8F5] hover:bg-[#C85A32] hover:text-white text-[#3D352E] border editorial-border transition shrink-0"
-                                    title={`Replace photo for ${slot.badge}`}
-                                  >
-                                    <Camera className="w-3 h-3" />
-                                  </button>
+                                {/* Slot Caption */}
+                                <div className="p-2.5 bg-white border-t editorial-border text-[10px]">
+                                  <p className="font-bold text-[#141210] truncate">{slot.title}</p>
+                                  <p className="text-[#3D352E]/70 text-[9px] truncate">{slot.filenameHint}</p>
                                 </div>
                               </div>
                             );
