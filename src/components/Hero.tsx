@@ -149,8 +149,8 @@ export const Hero: React.FC<HeroProps> = ({ onContactClick }) => {
                 <span className="text-[#3D352E]/80 text-[11px]">B.Tech (2022–2026)</span>
               </div>
               <div>
-                <span className="block font-serif text-2xl font-bold text-[#2A5C55]">Operations</span>
-                <span className="text-[#3D352E]/80 text-[11px]">Quality Control Associate</span>
+                <span className="block font-serif text-2xl font-bold text-[#2A5C55]">Inspire AI</span>
+                <span className="text-[#3D352E]/80 text-[11px]">Business Development</span>
               </div>
               <div>
                 <span className="block font-serif text-2xl font-bold text-[#141210]">Design</span>

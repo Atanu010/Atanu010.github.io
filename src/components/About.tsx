@@ -48,9 +48,9 @@ export const About: React.FC = () => {
               <div className="flex items-start gap-3 pt-2 border-t editorial-border">
                 <Briefcase className="w-5 h-5 text-[#2A5C55] shrink-0 mt-0.5" />
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#141210]">Operations &amp; Quality</h4>
-                  <p className="text-xs text-[#3D352E] font-medium mt-0.5">Final Quality Control Associate</p>
-                  <p className="text-[11px] text-[#3D352E]/70">Ultrahuman Facility · Process verification &amp; SOP compliance</p>
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#141210]">Work Experience</h4>
+                  <p className="text-xs text-[#3D352E] font-medium mt-0.5">Business Development Associate | Inspire AI</p>
+                  <p className="text-[11px] text-[#3D352E]/70">Bangalore | AUGUST - PRESENT</p>
                 </div>
               </div>
 

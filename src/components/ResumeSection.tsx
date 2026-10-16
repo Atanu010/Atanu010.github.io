@@ -28,7 +28,7 @@ export const ResumeSection: React.FC = () => {
               Verified Resume &amp; Credentials
             </h2>
             <p className="text-base text-[#3D352E] font-normal max-w-xl leading-relaxed">
-              Official academic background, operational track record at Ultrahuman Facility and Culrav Cultural Club, verified skills, and contact information.
+              Official academic background, professional experience at Inspire AI and Culrav Cultural Club, verified skills, and contact information.
             </p>
           </div>
 
@@ -89,7 +89,7 @@ export const ResumeSection: React.FC = () => {
               Executive Profile
             </h3>
             <p className="text-xs sm:text-sm text-[#3D352E] leading-relaxed">
-              Multidisciplinary professional combining rigorous electrical engineering training with practical leadership in high-pressure event operations, digital marketing campaign strategy, UI/UX thinking, and long-form content writing. Proven track record in high-stakes festival logistics, team leadership across 4 editions of Flames cultural fest, and precision quality assurance at Ultrahuman Facility.
+              Multidisciplinary professional combining rigorous electrical engineering training with practical leadership in high-pressure event operations, digital marketing campaign strategy, UI/UX thinking, and long-form content writing. Proven track record in high-stakes festival logistics, team leadership across 4 editions of Flames cultural fest, and business development at Inspire AI.
             </p>
           </div>
 
@@ -102,17 +102,17 @@ export const ResumeSection: React.FC = () => {
 
             <div className="space-y-8">
               
-              {/* Ultrahuman */}
+              {/* Inspire AI */}
               <div className="space-y-2 border-l-2 border-[#231F1C] pl-4">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                  <h4 className="text-base font-bold text-[#141210]">Final Quality Control Associate</h4>
-                  <span className="text-xs font-mono text-[#3D352E]/70">Ultrahuman Facility · Ongoing</span>
+                  <h4 className="text-base font-bold text-[#141210]">Business Development Associate</h4>
+                  <span className="text-xs font-mono text-[#3D352E]/70">Inspire AI · Bangalore | AUGUST – PRESENT</span>
                 </div>
-                <p className="text-xs font-semibold text-[#2A5C55]">Hardware &amp; Manufacturing Operations</p>
+                <p className="text-xs font-semibold text-[#2A5C55]">Business Development &amp; Client Growth</p>
                 <ul className="list-disc list-inside text-xs text-[#3D352E] space-y-1 pt-1">
-                  <li>Executed final-stage quality control inspections ensuring strict adherence to manufacturing specifications.</li>
-                  <li>Maintained thorough SOP compliance and defect identification records to uphold zero-error packaging output.</li>
-                  <li>Coordinated across line technicians and dispatch supervisors to guarantee component traceability.</li>
+                  <li>Leading client outreach, partnership development, and strategic account acquisition for AI solutions.</li>
+                  <li>Engaging prospective enterprise clients to identify organizational bottlenecks and align tailored business solutions.</li>
+                  <li>Collaborating with cross-functional teams to translate client requirements into pipeline momentum and revenue growth.</li>
                 </ul>
               </div>
 
